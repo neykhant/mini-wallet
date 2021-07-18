@@ -1,7 +1,7 @@
 @extends('backend.layouts.app');
 
 @section('title', 'Dashboard');
-
+@section('home-active', 'mm-active');
 @section('content');
 <div class="app-page-title">
     <div class="page-title-wrapper">
