@@ -25,6 +25,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css">
     
+    <link rel="stylesheet" href="{{asset('backend/css/style.css')}}">
+    
     @yield('extra_css')
     
 </head>
@@ -61,6 +63,15 @@
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>
     
+    <script>
+        $(document).ready(function(){
+            $('.back-btn').on('click', function(){
+                window.history.go(-1);
+                return false;
+            });
+        });
+    </script>
+
     @yield('scripts')
 </body>
 

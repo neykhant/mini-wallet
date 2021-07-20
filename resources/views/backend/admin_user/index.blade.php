@@ -14,14 +14,20 @@
     </div>
 </div>
 
-<div class="content">
+<div class="pt-3">
+    <a href="{{ route('admin.admin-user.create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Create Admin User</a>
+</div>
+
+<div class="content pt-3">
     <div class="card">
         <div class="card-body">
             <table class="table table-bordered Datatable">
                 <thead>
+                    <tr class="bg-light">
                     <th>Name</th>
                     <th>Email</th>
                     <th>Phone</th>
+                    </tr>
                 </thead>
                 <tbody>
                 </tbody>
