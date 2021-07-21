@@ -24,10 +24,10 @@
             <table class="table table-bordered Datatable">
                 <thead>
                     <tr class="bg-light">
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Action</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -41,7 +41,8 @@
 @section('scripts')
 <script>
     $(document).ready(function() {
-        $('.Datatable').DataTable({
+
+        var table = $('.Datatable').DataTable({
             processing: true,
             serverSide: true,
             ajax: "/admin/admin-user/datatable/ssd",
@@ -62,7 +63,29 @@
                     name: "action"
                 }
             ]
+        });
 
+        $(document).on('click', '.delete', function(e) {
+            e.preventDefault();
+
+            var id = $(this).data('id');
+            Swal.fire({
+                title: 'Are you sure want to delete?',
+                showCancelButton: true,
+                confirmButtonText: `Confirm`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    $.ajax({
+                        url: '/admin/admin-user/'+id,
+                        type: 'DELETE',
+
+                        success: function(){
+                            table.ajax.reload();
+                        }
+                    });
+                }
+            })
         });
     });
 </script>

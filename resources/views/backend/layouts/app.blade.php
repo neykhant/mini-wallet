@@ -9,6 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
     <meta name="msapplication-tap-highlight" content="no">
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>@yield('title')</title>
 
     <!--
@@ -65,12 +67,27 @@
 
     <!-- Laravel Javascript Validation -->
     <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
-   <!-- sweet Alert 2 -->
+    <!-- sweet Alert 2 -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
     <script>
         $(document).ready(function() {
+            // $('meta[name="csrf-token"]').attr('content');
+
+            // let token = document.head.querySelector('meta[name="csrf-token"]').attr('content');
+
+            let token = document.querySelector('meta[name=csrf-token]');
+            // console.log(token);
+
+            if(token){
+                $.ajaxSetup({
+                    headers: {
+                         'X-CSRF-TOKEN': token.content
+                    }
+                });
+            }
+
             $('.back-btn').on('click', function() {
                 window.history.go(-1);
                 return false;
@@ -95,7 +112,7 @@
                 title: "{{session('create')}}"
             });
             @endif
-            
+
             @if(session('update'))
             Toast.fire({
                 icon: 'success',

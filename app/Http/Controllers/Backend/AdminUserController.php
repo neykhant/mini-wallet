@@ -29,7 +29,7 @@ class AdminUserController extends Controller
         return Datatables::of($data)
             ->addColumn('action', function ($each) {
                 $edit_icon = '<a href="'.route('admin.admin-user.edit', $each->id).'" class="text-warning"><i class="fas fa-edit"></i></a>';
-                $delete_icon = '<a href="" class="text-danger"><i class="fas fa-trash-alt"></i></a>';
+                $delete_icon = '<a href="#" class="text-danger delete" data-id="'.$each->id.'" ><i class="fas fa-trash-alt"></i></a>';
 
                 return '<div class="action-icon" >' . $edit_icon . $delete_icon . '</div>';
             })
@@ -69,5 +69,11 @@ class AdminUserController extends Controller
         $admin_user->update();
 
         return redirect()->route('admin.admin-user.index')->with('update', 'Your data has been updated!');
+    }
+
+    public function destroy($id){
+        $admin_user = AdminUser::findOrFail($id);
+        $admin_user->delete();
+        return 'success';
     }
 }
