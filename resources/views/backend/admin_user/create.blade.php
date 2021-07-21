@@ -17,11 +17,13 @@
 <div class="content pt-3">
     <div class="card">
         <div class="card-body">
-            <form action="{{route('admin.admin-user.store')}}" method="POST">
+            @include('backend.layouts.flash')
+
+            <form action="{{route('admin.admin-user.store')}}" method="POST" id="create">
                 @csrf
                 <div class="form-group">
                     <label for="">Name</label>
-                    <input type="text" name="name" class="form-control">
+                    <input type="text" name="name" class="form-control" value="{{old('name')}}">
                 </div>
                 <div class="form-group">
                     <label for="">Email</label>
@@ -47,9 +49,10 @@
 @endsection
 
 @section('scripts')
+{!! JsValidator::formRequest('App\Http\Requests\StoreAdminUserRequest', '#create') !!}
 <script>
     $(document).ready(function() {
-        
+
     });
 </script>
 @endsection
