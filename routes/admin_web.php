@@ -18,4 +18,7 @@ Route::prefix('admin')->name('admin.')->namespace('Backend')->middleware('auth:a
 
         Route::resource('admin-user', 'AdminUserController');
         Route::get('admin-user/datatable/ssd', 'AdminUserController@ssd');
+
+        Route::resource('user', 'UserController');
+        Route::get('user/datatable/ssd', 'UserController@ssd');
     });

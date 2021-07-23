@@ -167,6 +167,7 @@ return [
          */
         
         Yajra\Datatables\DatatablesServiceProvider::class,
+        Jenssegers\Agent\AgentServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -230,7 +231,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Datatables' => Yajra\Datatables\Facades\Datatables::class,
-        
+        'Agent' => Jenssegers\Agent\Facades\Agent::class,
+
     ],
 
 ];

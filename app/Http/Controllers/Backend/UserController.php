@@ -6,12 +6,12 @@ use App\AdminUser;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAdminUserRequest;
 use App\Http\Requests\UpdateAdminUserRequest;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Yajra\Datatables\Datatables;
 use Jenssegers\Agent\Agent;
-use SebastianBergmann\Environment\Console;
 
 // use Jenssegers\Agent\Facades\Agent;
 
@@ -20,17 +20,17 @@ use SebastianBergmann\Environment\Console;
 // use Datatables;
 
 
-class AdminUserController extends Controller
+class UserController extends Controller
 {
     public function index()
     {
         // $users = AdminUser::all();
-        return view('backend.admin_user.index');
+        return view('backend.user.index');
     }
 
     public function ssd()
     {
-        $data = AdminUser::query();
+        $data = User::query();
 
         return Datatables::of($data)
             ->editColumn('user_agent', function ($each) {
@@ -60,7 +60,7 @@ class AdminUserController extends Controller
                 return Carbon::parse($each->updated_at)->format('Y-m-d H:i:s');
             })
             ->addColumn('action', function ($each) {
-                $edit_icon = '<a href="' . route('admin.admin-user.edit', $each->id) . '" class="text-warning"><i class="fas fa-edit"></i></a>';
+                $edit_icon = '<a href="' . route('admin.user.edit', $each->id) . '" class="text-warning"><i class="fas fa-edit"></i></a>';
                 $delete_icon = '<a href="#" class="text-danger delete" data-id="' . $each->id . '" ><i class="fas fa-trash-alt"></i></a>';
 
                 return '<div class="action-icon" >' . $edit_icon . $delete_icon . '</div>';
