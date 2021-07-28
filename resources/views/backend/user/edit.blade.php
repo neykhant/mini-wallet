@@ -1,6 +1,6 @@
 @extends('backend.layouts.app');
-@section('title', 'Edit Admin Users');
-@section('admin-user-active','mm-active');
+@section('title', 'Edit Users');
+@section('user-active','mm-active');
 @section('content')
 <div class="app-page-title">
     <div class="page-title-wrapper">
@@ -9,7 +9,7 @@
                 <i class="pe-7s-users icon-gradient bg-mean-fruit">
                 </i>
             </div>
-            <div>Edit Admin Users</div>
+            <div>Edit Users</div>
         </div>
     </div>
 </div>
@@ -19,20 +19,20 @@
         <div class="card-body">
             @include('backend.layouts.flash')
 
-            <form action="{{route('admin.admin-user.update', $admin_user->id )}}" method="POST" id="update">
+            <form action="{{route('admin.user.update', $user->id )}}" method="POST" id="update">
                 @csrf
                 @method('PUT')
                 <div class="form-group">
                     <label for="">Name</label>
-                    <input type="text" name="name" class="form-control" value="{{ $admin_user->name }}">
+                    <input type="text" name="name" class="form-control" value="{{ $user->name }}">
                 </div>
                 <div class="form-group">
                     <label for="">Email</label>
-                    <input type="eamil" name="email" class="form-control" value="{{ $admin_user->email }}">
+                    <input type="eamil" name="email" class="form-control" value="{{ $user->email }}">
                 </div>
                 <div class="form-group">
                     <label for="">Phone</label>
-                    <input type="number" name="phone" class="form-control"  value="{{ $admin_user->phone }}">
+                    <input type="number" name="phone" class="form-control"  value="{{ $user->phone }}">
                 </div>
                 <div class="form-group">
                     <label for="">Password</label>
@@ -50,7 +50,7 @@
 @endsection
 
 @section('scripts')
-{!! JsValidator::formRequest('App\Http\Requests\UpdateAdminUserRequest', '#update') !!}
+{!! JsValidator::formRequest('App\Http\Requests\UpdateUserRequest', '#update') !!}
 <script>
     $(document).ready(function() {
 

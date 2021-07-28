@@ -3,19 +3,21 @@
 namespace App\Http\Controllers\Backend;
 
 use App\AdminUser;
+use App\Helpers\UUIDGenerate;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreAdminUserRequest;
-use App\Http\Requests\UpdateAdminUserRequest;
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\User;
+use App\Wallet;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Yajra\Datatables\Datatables;
 use Jenssegers\Agent\Agent;
+use Illuminate\Support\Facades\DB;
+
 
 // use Jenssegers\Agent\Facades\Agent;
-
-
 // use Yajra\Datatables\Datatables;
 // use Datatables;
 
@@ -34,14 +36,14 @@ class UserController extends Controller
 
         return Datatables::of($data)
             ->editColumn('user_agent', function ($each) {
-                if($each->user_agent){
-                     
+                if ($each->user_agent) {
+
                     $agent = new Agent();
                     $agent->setUserAgent($each->user_agent);
                     $device = $agent->device();
                     $platform = $agent->platform();
                     $browser = $agent->browser();
-    
+
                     return '<table class="table table-bordered">
                         <tboody>
                         <tr><td>Device</td><td>' . $device . '</td></tr>
@@ -51,12 +53,12 @@ class UserController extends Controller
                     </table>';
                     return $platform . $device . $browser;
                 }
-                return '-'; 
+                return '-';
             })
-            ->editColumn('created_at', function($each){
+            ->editColumn('created_at', function ($each) {
                 return Carbon::parse($each->created_at)->format('Y-m-d H:i:s');
             })
-            ->editColumn('updated_at', function($each){
+            ->editColumn('updated_at', function ($each) {
                 return Carbon::parse($each->updated_at)->format('Y-m-d H:i:s');
             })
             ->addColumn('action', function ($each) {
@@ -71,44 +73,91 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('backend.admin_user.create');
+        return view('backend.user.create');
     }
 
-    public function store(StoreAdminUserRequest $request)
+    public function store(StoreUserRequest $request)
     {
-        $admin_user = new AdminUser();
-        $admin_user->name = $request->name;
-        $admin_user->email = $request->email;
-        $admin_user->phone = $request->phone;
-        $admin_user->password = Hash::make($request->password);
-        $admin_user->save();
+        DB::beginTransaction();
 
-        return redirect()->route('admin.admin-user.index')->with('create', 'Your data has been created!');
+        try {
+            $user = new  User();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->phone = $request->phone;
+            $user->password = Hash::make($request->password);
+            $user->save();
+
+            Wallet::firstOrCreate(
+                [
+                    'user_id' => $user->id,
+                ],
+                [
+                    'account_number' => UUIDGenerate::accountNumber(),
+                    'amount' => 0,
+                ]
+            );
+
+            DB::commit();
+
+            return redirect()->route('admin.user.index')->with('create', 'Your data has been created!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->withErrors(['fail' => 'Something Wrong!' . $e->getMessage()])->withInput();
+        }
+
+
+
+
+        // $wallet = new Wallet();
+        // $wallet->user_id = $user->id;
+        // $wallet->account_number = '1234123412341234';
+        // $wallet->amount =0;
+        // $wallet->save();
+
+
     }
 
     public function edit($id)
     {
-        $admin_user = AdminUser::findOrFail($id);
-        return view('backend.admin_user.edit', compact('admin_user'));
+        $user = User::findOrFail($id);
+        return view('backend.user.edit', compact('user'));
     }
 
-    public function update($id, UpdateAdminUserRequest $request)
+    public function update($id, UpdateUserRequest $request)
     {
 
-        $admin_user = AdminUser::findOrFail($id);
-        $admin_user->name = $request->name;
-        $admin_user->email = $request->email;
-        $admin_user->phone = $request->phone;
-        $admin_user->password = $request->password ? Hash::make($request->password) : $admin_user->password;
-        $admin_user->update();
+        DB::beginTransaction();
 
-        return redirect()->route('admin.admin-user.index')->with('update', 'Your data has been updated!');
+        try {
+            $user = User::findOrFail($id);
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->phone = $request->phone;
+            $user->password = $request->password ? Hash::make($request->password) : $user->password;
+            $user->update();
+
+            Wallet::firstOrCreate(
+                [
+                    'user_id' => $user->id,
+                ],
+                [
+                    'account_number' => UUIDGenerate::accountNumber(),
+                    'amount' => 0,
+                ]
+            );
+            DB::commit();
+            return redirect()->route('admin.user.index')->with('update', 'Your data has been updated!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->withErrors(['fail' => 'Something Wrong!' . $e->getMessage()])->withInput();
+        }
     }
 
     public function destroy($id)
     {
-        $admin_user = AdminUser::findOrFail($id);
-        $admin_user->delete();
+        $user = User::findOrFail($id);
+        $user->delete();
         return 'success';
     }
 }

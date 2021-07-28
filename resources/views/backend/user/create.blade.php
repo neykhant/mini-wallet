@@ -1,6 +1,6 @@
 @extends('backend.layouts.app');
-@section('title', 'Create Admin Users');
-@section('admin-user-active','mm-active');
+@section('title', 'Create Users');
+@section('user-active','mm-active');
 @section('content')
 <div class="app-page-title">
     <div class="page-title-wrapper">
@@ -9,7 +9,7 @@
                 <i class="pe-7s-users icon-gradient bg-mean-fruit">
                 </i>
             </div>
-            <div>Create Admin Users</div>
+            <div>Create Users</div>
         </div>
     </div>
 </div>
@@ -19,7 +19,7 @@
         <div class="card-body">
             @include('backend.layouts.flash')
 
-            <form action="{{route('admin.admin-user.store')}}" method="POST" id="create">
+            <form action="{{route('admin.user.store')}}" method="POST" id="create">
                 @csrf
                 <div class="form-group">
                     <label for="">Name</label>
@@ -49,7 +49,7 @@
 @endsection
 
 @section('scripts')
-{!! JsValidator::formRequest('App\Http\Requests\StoreAdminUserRequest', '#create') !!}
+{!! JsValidator::formRequest('App\Http\Requests\StoreUserRequest', '#create') !!}
 <script>
     $(document).ready(function() {
 

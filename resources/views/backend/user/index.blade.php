@@ -29,6 +29,7 @@
                         <th>Phone</th>
                         <th>IP</th>
                         <th>User Agent</th>
+                        <th>Login at</th>
                         <th>Created up</th>
                         <th>Updated up</th>
                         <th>Action</th>
@@ -72,6 +73,10 @@
                     name: "user_agent",
                     sortable: false,
                     searchable: false
+                },
+                {
+                    data: "login_at",
+                    name: "login_at"
                 },
                 {
                     data: "created_at",
