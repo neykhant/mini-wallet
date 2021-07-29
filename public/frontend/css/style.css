@@ -1,0 +1,24 @@
+.auth-form{
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    border: none;
+    border-radius: 10px;
+}
+
+.auth-form a{
+    color: #333;
+    text-decoration: none;
+}
+
+.auth-form a:hover{
+    color: #5842E3;
+}
+
+.btn-theme{
+    background: #5842E3;
+    color: #fff;
+}
+
+.btn-theme:hover{
+    background: #5842E3;
+    color: #fff;
+}
