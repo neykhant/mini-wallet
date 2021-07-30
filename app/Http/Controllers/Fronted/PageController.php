@@ -7,7 +7,12 @@ use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-    public function home(){
+    public function home()
+    {
         return view('frontend.home');
+    }
+    public function profile()
+    {
+        return view('frontend.profile');
     }
 }

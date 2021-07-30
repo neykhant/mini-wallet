@@ -38,7 +38,7 @@
                         <button class="btn btn-theme btn-block mb-5">Login</button>
 
                         <div class="d-flex justify-content-between">
-                            <a href="{{route('register')}}">Sign Up</a>
+                            <a href="{{route('register')}}">Register Now</a>
                             @if (Route::has('password.request'))
                                 <a href="{{ route('password.request') }}">
                                     {{ __('Forgot Your Password?') }}

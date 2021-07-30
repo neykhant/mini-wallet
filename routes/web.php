@@ -15,14 +15,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-//user auth
-Auth::routes();
+
 
 //admin user auth
 Route::get('admin/login', 'Auth\AdminLoginController@showLoginForm');
 Route::post('admin/login', 'Auth\AdminLoginController@login')->name('admin.login');
 Route::post('admin/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
 
-Route::get('/', 'Fronted\PageController@home');
 
+//user auth
+Auth::routes();
 
+Route::middleware('auth')->namespace('Fronted')->group(function () {
+    Route::get('/', 'PageController@home')->name('home');
+    Route::get('/profile', 'PageController@profile')->name('profile');
+});

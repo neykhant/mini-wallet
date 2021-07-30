@@ -3,7 +3,7 @@
 @section('title', 'Register')
 @section('content')
 <div class="container">
-    <div class="row justify-content-center align-items-center" style="height: 100vh;">
+    <div class="row justify-content-center align-items-center" style="height: 120vh;">
         <div class="col-md-6">
             <div class="card auth-form">
                 <div class="card-body">
