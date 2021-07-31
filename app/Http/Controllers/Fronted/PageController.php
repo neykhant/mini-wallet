@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Fronted;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PageController extends Controller
 {
@@ -13,6 +14,7 @@ class PageController extends Controller
     }
     public function profile()
     {
-        return view('frontend.profile');
+        $user = Auth::guard('web')->user();
+        return view('frontend.profile', compact('user'));
     }
 }
