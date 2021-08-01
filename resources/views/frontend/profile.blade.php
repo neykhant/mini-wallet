@@ -29,15 +29,16 @@
 
     <div class="card mb-3">
         <div class="card-body pr-0">
-            <div class="d-flex justify-content-between">
+            <a href="{{route('update-password')}}" class="d-flex justify-content-between">
                 <span>Update Password</span>
                 <span class="mr-3"><i class="fas fa-angle-right"></i></span>
-            </div>
+            </a>
+
             <hr>
-            <div class="d-flex justify-content-between logout">
+            <a href="#" class="d-flex justify-content-between logout">
                 <span>Logout</span>
                 <span class="mr-3"><i class="fas fa-angle-right"></i></span>
-            </div>
+            </a>
         </div>
     </div>
 </div>
@@ -53,17 +54,18 @@
                 title: 'Are you sure want to logout?',
                 showCancelButton: true,
                 confirmButtonText: `Confirm`,
+                reverseButtons: true
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
                         url: "{{route('logout')}}",
                         type: 'POST',
                         success: function() {
-                        //    console.log(res);
-                           window.location.replace("{{route('profile')}}");
+                            //    console.log(res);
+                            window.location.replace("{{route('profile')}}");
                         }
                     });
-            
+
                 }
             })
         });

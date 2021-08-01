@@ -11,15 +11,31 @@ Theme Design
 
 */
 
-
 body {
     background: #ededf5;
     font-size: 15px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
+}
+
+a{
+    text-decoration: none;
+    color: #333;
+}
+
+a:hover{
+    color: #5842e3;
+    text-decoration: none;
+}
+
+.card{
+    border-radius: 10px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.09);
+
+    border: none;
 }
 
 .btn {
-    padding: 10px;
+    padding: 10px 25px;
 }
 
 .btn-theme {
@@ -32,6 +48,26 @@ body {
     color: #fff;
 }
 
+.invalid-feedback{
+    display: block;
+}
+/* ---------------------sweet alert------------------------------------ */
+.swal2-popup {
+    border-radius: 10px !important;
+}
+
+.swal2-title {
+    font-size:18px !important;
+}
+
+.swal2-styled{
+    border-radius: 10px !important;
+    padding: 10px 25px !important;
+}
+
+.swal2-styled .swal2-confirm{
+background: #5842e3 !important;
+}
 /* -------------------Auth Form----------------- */
 
 .auth-form {
@@ -125,8 +161,6 @@ body {
 }
 
 /* -----------------Account ---------------------------- */
-.account {
-}
 
 .account .profile {
     text-align: center;
@@ -143,5 +177,13 @@ body {
 
 .account .card {
     border-radius: 10px;
-    box-shadow: 0 1px 3px 0 rgba(0,0, 0, 0.09);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.09);
 }
+
+
+/* -------------------------update password----------------- */
+
+.update-password img{
+    width: 250px;
+}
+
