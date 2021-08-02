@@ -161,12 +161,19 @@ background: #5842e3 !important;
 }
 
 /* -----------------Account ---------------------------- */
+.account{
 
-.account .profile {
+}
+
+.account .card {
+    border-radius: 10px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.09);
+}
+.profile {
     text-align: center;
 }
 
-.account .profile img {
+.profile img {
     width: 100px;
     height: 100px;
     border-radius: 100px;
@@ -175,10 +182,6 @@ background: #5842e3 !important;
     background: #fff;
 }
 
-.account .card {
-    border-radius: 10px;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.09);
-}
 
 
 /* -------------------------update password----------------- */
@@ -212,8 +215,72 @@ background: #5842e3 !important;
     display: flex;
     justify-content: center;
     align-items: center;
+    animation: glow 5s infinite;
 }
 
 .scan-tab .inside i{
     margin: 0;
+}
+
+@keyframes glow{
+    0%{
+        box-shadow: 0 0 -10px #5842e3;
+    }
+
+    40%{
+        box-shadow: 0 0 15px #5842e3;
+    }
+
+    60%{
+        box-shadow: 0 0 15px #5842e3;
+    }
+
+    100%{
+        box-shadow: 0 0 -10px #5842e3;
+    }
+}
+
+
+
+/* ---------------------------wallet-------------------- */
+
+.wallet{
+
+}
+
+.wallet .my-card{
+    background: #5842e3;
+    color: #fff;
+}
+
+.wallet .my-card span{
+    text-transform: uppercase;
+    font-size: 14px;
+    display: inline-block;
+    margin-bottom: 5px;
+    color: #ededf5;
+}
+
+.wallet .my-card h4{
+    font-size: 22px;
+    font-weight: 900;
+}
+
+.wallet .my-card h5{
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.wallet .my-card p{
+    font-size: 16px;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+/* -------------------------Home-------------------------- */
+
+.shortcut-box img{
+    width: 30px;
+    height: 30px;
+    margin-right: 15px;
 }

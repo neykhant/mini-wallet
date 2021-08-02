@@ -12,7 +12,9 @@ class PageController extends Controller
 {
     public function home()
     {
-        return view('frontend.home');
+        $user = Auth::guard('web')->user();
+
+        return view('frontend.home', compact('user'));
     }
     public function profile()
     {
@@ -38,6 +40,10 @@ class PageController extends Controller
         }
 
         return back()->withErrors(['old_password' => 'The old password is not correct.'])->withInput();
+    }
 
+    public function wallet(){
+        $authUser = auth()->guard('web')->user();
+        return view('frontend.wallet', compact('authUser'));
     }
 }

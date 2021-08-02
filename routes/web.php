@@ -32,4 +32,7 @@ Route::middleware('auth')->namespace('Fronted')->group(function () {
     Route::get('/profile', 'PageController@profile')->name('profile');
     Route::get('/update-password', 'PageController@updatePassword')->name('update-password');
     Route::post('/update-password', 'PageController@updatePasswordStore')->name('update-password.store');
+
+    Route::get('/wallet', 'PageController@wallet')->name('wallet');
+
 });

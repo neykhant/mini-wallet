@@ -77,7 +77,7 @@
                             </a>
                         </div>
                         <div class="col-3 text-center">
-                            <a href="">
+                            <a href="{{route('wallet')}}">
                                 <i class="fas fa-wallet"></i>
                                 <p>Wallet</p>
                             </a>
