@@ -4,9 +4,8 @@
 <div class="transfer">
     <div class="card ">
         <div class="card-body">
-            <form action="{{ url('transfer/confirm') }}" method="POST" autocomplete="off">
-                @csrf
-
+            <form action="{{ url('transfer/confirm') }}" method="GET" autocomplete="off">
+                 
                 <div class="form-group">
                     <label for="">From</label>
                     <p class="mb-1 text-muted ">{{ $authUser->name }}</p>
@@ -55,6 +54,7 @@
 @section('scripts')
 <script>
     $(document).ready(function() {
+
         $('.verify-btn').on('click', function() {
 
             var phone = $('.to_phone').val();
@@ -62,7 +62,7 @@
                 url: '/to-account-verify?phone=' + phone ,
                 type: 'GET',
                 success: function(res) {
-                    console.log(res);
+                    // console.log(res);
                      if(res.status == 'success'){
                         $('.to_account_info').text('('+res.data['name']+')');
                      }else{

@@ -36,7 +36,9 @@ Route::middleware('auth')->namespace('Fronted')->group(function () {
     Route::get('/wallet', 'PageController@wallet')->name('wallet');
 
     Route::get('/transfer', 'PageController@transfer');
-    Route::post('/transfer/confirm', 'PageController@transferConfirm');
+    Route::get('/transfer/confirm', 'PageController@transferConfirm');
+    Route::post('/transfer/complete', 'PageController@transferComplete');
 
     Route::get('/to-account-verify', 'PageController@toAccountVerify');
+    Route::get('/password-check', 'PageController@passwordCheck');
 });
