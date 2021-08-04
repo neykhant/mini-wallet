@@ -38,4 +38,5 @@ Route::middleware('auth')->namespace('Fronted')->group(function () {
     Route::get('/transfer', 'PageController@transfer');
     Route::post('/transfer/confirm', 'PageController@transferConfirm');
 
+    Route::get('/to-account-verify', 'PageController@toAccountVerify');
 });

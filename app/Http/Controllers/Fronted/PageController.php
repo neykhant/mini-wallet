@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Fronted;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TransferFormValidateRequest;
 use App\Http\Requests\UpdatePasswordRequest;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -23,17 +24,19 @@ class PageController extends Controller
         return view('frontend.profile', compact('user'));
     }
 
-    public function updatePassword(){
+    public function updatePassword()
+    {
         return view('frontend.update_password');
     }
 
-    public function updatePasswordStore(UpdatePasswordRequest $request){
-        
+    public function updatePasswordStore(UpdatePasswordRequest $request)
+    {
+
         $old_password = $request->old_password;
         $new_password = $request->new_password;
         $user = Auth::guard('web')->user();
 
-        if(Hash::check($old_password, $user->password)){
+        if (Hash::check($old_password, $user->password)) {
             $user->password = Hash::make($new_password);
             $user->update();
 
@@ -43,21 +46,32 @@ class PageController extends Controller
         return back()->withErrors(['old_password' => 'The old password is not correct.'])->withInput();
     }
 
-    public function wallet(){
+    public function wallet()
+    {
         $authUser = auth()->guard('web')->user();
         return view('frontend.wallet', compact('authUser'));
     }
 
-    public function transfer(){
+    public function transfer()
+    {
         $authUser = auth()->guard('web')->user();
         return view('frontend.transfer', compact('authUser'));
     }
 
-    public function transferConfirm(TransferFormValidateRequest $request){
+    public function transferConfirm(TransferFormValidateRequest $request)
+    {
 
-        if($request->amount < 1000){
+        if ($request->amount < 1000) {
             return back()
                 ->withErrors(['amount' => 'The amount must be at least 1000 MMK.'])
+                ->withInput();
+        }
+
+        $check_to = User::where('phone', $request->to_phone)->first();
+
+        if (!$check_to) {
+            return back()
+                ->withErrors(['to_phone' => 'To account is invalide.'])
                 ->withInput();
         }
 
@@ -66,6 +80,26 @@ class PageController extends Controller
         $amount = $request->amount;
         $description = $request->description;
 
-        return view('frontend.transfer_confirm', compact('authUser','to_phone','amount','description'));
+        return view('frontend.transfer_confirm', compact('authUser', 'to_phone', 'amount', 'description'));
+    }
+
+    public function toAccountVerify(Request $request)
+    {
+        $authUser = auth()->guard('web')->user();
+        if ($authUser->phone != $request->phone) {
+
+            $user = User::where('phone', $request->phone)->first();
+            if ($user) {
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'success',
+                    'data' => $user
+                ]);
+            }
+        }
+        return response()->json([
+            'status' => 'fail',
+            'message' => 'Invalid data',
+        ]);
     }
 }
