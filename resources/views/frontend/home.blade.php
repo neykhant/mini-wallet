@@ -11,22 +11,44 @@
             </div>
         </div>
         <div class="col-6">
-            <div class="card shortcut-box">
-                <div class="card-body">
+            <div class="card shortcut-box mb-3">
+                <div class="card-body p-3">
                     <img src="{{ asset('img/qr-code-scan.png') }}" alt="">
                     <span>Scan & Pay</span>
                 </div>
             </div>
         </div>
         <div class="col-6">
-            <div class="card shortcut-box">
-                <div class="card-body">
+            <div class="card shortcut-box mb-3">
+                <div class="card-body p-3">
                     <img src="{{ asset('img/qr.png') }}" alt="">
                     <span>Recieve QR</span>
                 </div>
             </div>
         </div>
 
+        <div class="col-12">
+            <div class="card mb-3 function-box">
+                <div class="card-body pr-0">
+                    <a href="{{url('transfer') }}" class="d-flex justify-content-between">
+                        <span><img src="{{ asset('img/money-transfer.png') }}" alt=""> Transfer</span>
+                        <span class="mr-3"><i class="fas fa-angle-right"></i></span>
+                    </a>
+
+                    <hr>
+                    <a href="#" class="d-flex justify-content-between">
+                        <span><img src="{{ asset('img/wallet.png') }}" alt="">Wallet</span>
+                        <span class="mr-3"><i class="fas fa-angle-right"></i></span>
+                    </a>
+
+                    <hr>
+                    <a href="#" class="d-flex justify-content-between">
+                        <span><img src="{{ asset('img/transaction.png') }}" alt="">Transaction</span>
+                        <span class="mr-3"><i class="fas fa-angle-right"></i></span>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 @endsection
