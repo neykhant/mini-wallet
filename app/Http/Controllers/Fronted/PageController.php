@@ -181,6 +181,24 @@ class PageController extends Controller
     }
 
 
+    public function transaction(){
+        $authUser = auth()->guard('web')->user();
+        $transactions = Transaction::where('user_id', $authUser->id)->with('user', 'source')
+                                    ->orderBy('created_at','DESC')->paginate(5);
+
+        return view('frontend.transaction', compact('transactions'));
+    }
+
+
+    public function transactionDetails($trx_id){
+        $authUser = auth()->guard('web')->user();
+        $transaction = Transaction::with('user', 'source')->where('user_id', $authUser->id)
+                                    ->where('trx_id', $trx_id)->first();
+
+        return view('frontend.transaction_detail', compact('transaction'));
+    }
+
+
     public function toAccountVerify(Request $request)
     {
         $authUser = auth()->guard('web')->user();

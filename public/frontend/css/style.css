@@ -290,3 +290,9 @@ background: #5842e3 !important;
     height: 28px;
     margin-right: 8px;
 }
+
+/* --------------------Transaction----------------------------- */
+
+.transaction-detail img{
+    width: 60px;
+}
