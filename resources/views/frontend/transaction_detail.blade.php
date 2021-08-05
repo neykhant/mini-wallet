@@ -5,8 +5,16 @@
     <div class="card">
         <div class="card-body">
             <div class="text-center mb-3">
-                <img src="{{ asset('img/transaction.png') }}" alt="">
+                <img src="{{ asset('img/checked.png') }}" alt="">
             </div>
+
+            @if(session('transfer_success'))
+            <div class="alert alert-success text-center fade show " role="alert">
+                {{session('transfer_success')}}
+                
+            </div>
+            @endif
+
             @if($transaction->type ==1 )
             <h6 class="text-center text-success mb-4">{{number_format($transaction->amount) }} MMK</h6>
 

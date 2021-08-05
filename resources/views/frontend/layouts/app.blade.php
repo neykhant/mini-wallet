@@ -41,9 +41,9 @@
                             @endif
                         </div>
                         <div class="col-8 text-center">
-                            
+
                             <h3>@yield('title')</h3>
-                            
+
                         </div>
                         <div class="col-2 text-center">
                             <a href="">
@@ -102,7 +102,7 @@
 
     <!-- bootstrap script -->
     <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script> -->
-    
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
@@ -110,6 +110,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
     <!-- sweet Alert 2 -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- infinite jscrol -->
+    <script src="{{ asset('frontend/js/jscroll.min.js') }}"></script>
+    
     <script>
         $(document).ready(function() {
             let token = document.querySelector('meta[name=csrf-token]');
@@ -119,8 +122,8 @@
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': token.content,
-                        'Content-type' : 'application/json',
-                        'Accept' : 'application/json'
+                        'Content-type': 'application/json',
+                        'Accept': 'application/json'
                     }
                 });
             };
@@ -150,8 +153,8 @@
                 title: "{{session('update')}}"
             });
             @endif
-            
-            $('.back-btn').on('click', function(e){
+
+            $('.back-btn').on('click', function(e) {
                 e.preventDefault();
                 window.history.go(-1);
                 return false;
