@@ -2,6 +2,39 @@
 @section('title', 'Transaction')
 @section('content')
 <div class="transaction">
+
+    <div class="card mb-2">
+        <div class="card-body p-2">
+            <div class="row">
+                <div class="col-6">
+                    <!-- <div class="input-group my-2">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text p-1">Type</label>
+                        </div>
+                        <select class="custom-select">
+                            <option value="">All</option>
+                            <option value="1">Income</option>
+                            <option value="2">Expense</option>
+                        </select>
+                    </div> -->
+                </div>
+
+                <div class="col-6">
+                    <div class="input-group my-2">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text p-1">Type</label>
+                        </div>
+                        <select class="custom-select type">
+                            <option value="">All</option>
+                            <option value="1" @if(request()->type == 1) selected @endif >Income</option>
+                            <option value="2" @if(request()->type == 2 ) selected @endif >Expense</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="infinite-scroll">
         @foreach( $transactions as $transaction )
         <a href="{{ url('transaction/' . $transaction->trx_id ) }}">
@@ -35,7 +68,7 @@
 @endsection
 
 @section('scripts')
-<script >
+<script>
     $('ul.pagination').hide();
     $(function() {
         $('.infinite-scroll').jscroll({
@@ -47,6 +80,13 @@
             callback: function() {
                 $('ul.pagination').remove();
             }
+        });
+
+        $('.type').change(function() {
+            var type = $('.type').val();
+            history.pushState(null, '', `?type=${type}`);
+            window.location.reload();
+            // alert(type);
         });
     });
 </script>

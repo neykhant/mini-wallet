@@ -171,7 +171,7 @@ class PageController extends Controller
 
             DB::commit();
             return redirect('/transaction/' . $from_account_transaction->trx_id)
-                    ->with('transfer_success', 'Successfuly transfered.');
+                ->with('transfer_success', 'Successfuly transfered.');
         } catch (\Exception $error) {
             DB::rollBack();
 
@@ -182,11 +182,18 @@ class PageController extends Controller
     }
 
 
-    public function transaction()
+    public function transaction(Request $request)
     {
         $authUser = auth()->guard('web')->user();
-        $transactions = Transaction::where('user_id', $authUser->id)->with('user', 'source')
-                                    ->orderBy('created_at','DESC')->paginate(3);
+        $transactions = Transaction::where('user_id', $authUser->id)
+            ->with('user', 'source')
+            ->orderBy('created_at', 'DESC');
+
+        if ($request->type) {
+            $transactions  = $transactions->where('type', $request->type);
+        }
+
+        $transactions = $transactions->paginate(5);
 
         return view('frontend.transaction', compact('transactions'));
     }
@@ -195,7 +202,7 @@ class PageController extends Controller
     {
         $authUser = auth()->guard('web')->user();
         $transaction = Transaction::with('user', 'source')->where('user_id', $authUser->id)
-                                    ->where('trx_id', $trx_id)->first();
+            ->where('trx_id', $trx_id)->first();
 
         return view('frontend.transaction_detail', compact('transaction'));
     }
