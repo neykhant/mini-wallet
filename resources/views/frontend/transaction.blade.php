@@ -2,21 +2,17 @@
 @section('title', 'Transaction')
 @section('content')
 <div class="transaction">
-
-    <div class="card mb-2">
+    <div class="card mb-3">
         <div class="card-body p-2">
+            <h6><i class="fas fa-filter"></i> Filter</h6>
             <div class="row">
                 <div class="col-6">
-                    <!-- <div class="input-group my-2">
+                    <div class="input-group my-2">
                         <div class="input-group-prepend">
-                            <label class="input-group-text p-1">Type</label>
+                            <label class="input-group-text p-1">Date</label>
                         </div>
-                        <select class="custom-select">
-                            <option value="">All</option>
-                            <option value="1">Income</option>
-                            <option value="2">Expense</option>
-                        </select>
-                    </div> -->
+                        <input type="text" class="form-control date" value="{{request()->date ?? date('Y-m-d')}}">
+                    </div>
                 </div>
 
                 <div class="col-6">
@@ -34,6 +30,8 @@
             </div>
         </div>
     </div>
+
+    <h6>Transaction</h6>
 
     <div class="infinite-scroll">
         @foreach( $transactions as $transaction )
@@ -70,6 +68,7 @@
 @section('scripts')
 <script>
     $('ul.pagination').hide();
+
     $(function() {
         $('.infinite-scroll').jscroll({
             autoTrigger: true,
@@ -82,10 +81,30 @@
             }
         });
 
-        $('.type').change(function() {
+        $('.date').daterangepicker({
+            "singleDatePicker": true,
+            "autoApply": true,
+            "locale": {
+                "format": "YYYY-MM-DD",
+            }
+        });
+
+        $('.date').on('apply.daterangepicker', function(ev, picker) {
+            var date = $('.date').val();
             var type = $('.type').val();
-            history.pushState(null, '', `?type=${type}`);
+
+            history.pushState(null, '', `?date=${date}&type=${type}`);
             window.location.reload();
+
+        });
+
+        $('.type').change(function() {
+            var date = $('.date').val();
+            var type = $('.type').val();
+
+            history.pushState(null, '', `?date=${date}&type=${type}`);
+            window.location.reload();
+
             // alert(type);
         });
     });

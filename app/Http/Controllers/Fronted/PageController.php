@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use PhpParser\Node\Stmt\TryCatch;
+use SebastianBergmann\Environment\Console;
 
 class PageController extends Controller
 {
@@ -191,6 +192,11 @@ class PageController extends Controller
 
         if ($request->type) {
             $transactions  = $transactions->where('type', $request->type);
+        }
+
+        if($request->date){
+            $transactions = $transactions->whereDate('created_at', $request->date);
+            
         }
 
         $transactions = $transactions->paginate(5);
