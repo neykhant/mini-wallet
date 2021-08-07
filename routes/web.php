@@ -47,4 +47,6 @@ Route::middleware('auth')->namespace('Fronted')->group(function () {
     Route::get('/to-account-verify', 'PageController@toAccountVerify');
     Route::get('/password-check', 'PageController@passwordCheck');
     Route::get('/transfer-hash', 'PageController@transferHash');
+
+    Route::get('/receive-qr', 'PageController@receiveQR');
 });

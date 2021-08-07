@@ -19,12 +19,14 @@
             </div>
         </div>
         <div class="col-6">
+            <a href="{{url('receive-qr') }}">
             <div class="card shortcut-box mb-3">
                 <div class="card-body p-3">
                     <img src="{{ asset('img/qr.png') }}" alt="">
                     <span>Recieve QR</span>
                 </div>
             </div>
+            </a>
         </div>
 
         <div class="col-12">

@@ -17,6 +17,7 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "2.4",
         "proengsoft/laravel-jsvalidation": "^4.4",
+        "simplesoftwareio/simple-qrcode": "~2",
         "yajra/laravel-datatables-oracle": "^9.18"
     },
     "require-dev": {

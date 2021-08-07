@@ -192,7 +192,6 @@ class PageController extends Controller
                 ->withInput();
         }
 
-
         if ($from_account->phone == $to_phone) {
             return back()
                 ->withErrors(['to_phone' => 'To account is invalide.'])
@@ -353,5 +352,11 @@ class PageController extends Controller
             'status' => 'success',
             'data' => $hash_value,
         ]);
+    }
+
+    public function receiveQR(Request $request)
+    {
+        $authUser = auth()->guard('web')->user();
+        return view('frontend.receive_qr', compact('authUser'));
     }
 }
