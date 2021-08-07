@@ -4,10 +4,11 @@
 <div class="transfer">
     <div class="card ">
         <div class="card-body">
+            @include('frontend.layouts.flash')
+            
             <form action="{{ url('transfer/confirm') }}" method="GET" autocomplete="off" id="transfer-form">
 
-            <input type="hidden" name="hash_value" class="hash_value" value="">
-
+                <input type="hidden" name="hash_value" class="hash_value" value="">
 
                 <div class="form-group">
                     <label for="">From</label>
@@ -94,7 +95,7 @@
                     if (res.status == 'success') {
                         $('.hash_value').val(res.data);
                         $('#transfer-form').submit();
-                    } 
+                    }
                 }
             });
         });

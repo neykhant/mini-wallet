@@ -65,17 +65,36 @@ class PageController extends Controller
 
     public function transferConfirm(TransferFormValidateRequest $request)
     {
-        return $request->all();
-        
-        if ($request->amount < 1000) {
+        // return back()
+        //         ->withErrors(['fail' => ' The given data is invalid.'])
+        //         ->withInput();
+        // return $request->all();
+        $authUser = auth()->guard('web')->user();
+
+        $from_account = $authUser;
+        $to_phone = $request->to_phone;
+        $amount = $request->amount;
+        $description = $request->description;
+        $hash_value = $request->hash_value;
+
+
+        $str = $to_phone . $amount . $description;
+        $hash_value2 = hash_hmac('sha256', $str, 'magicpay123!@#');
+
+        if ($hash_value !== $hash_value2) {
+            return back()
+                ->withErrors(['amount' => 'The given data is invalid.'])
+                ->withInput();
+        }
+
+        if ($amount < 1000) {
             return back()
                 ->withErrors(['amount' => 'The amount must be at least 1000 MMK.'])
                 ->withInput();
         }
 
-        $authUser = auth()->guard('web')->user();
 
-        if ($authUser->phone == $request->to_phone) {
+        if ($from_account->phone == $to_phone) {
             return back()
                 ->withErrors(['to_phone' => 'To account is invalide.'])
                 ->withInput();
@@ -89,26 +108,92 @@ class PageController extends Controller
                 ->withInput();
         }
 
-        $from_account = $authUser;
-        // $to_phone = $request->to_phone;
-        $amount = $request->amount;
-        $description = $request->description;
+        if (!$from_account->wallet || !$to_account->wallet) {
+            return back()
+                ->withErrors(['fail' => ' The given data is invalid.'])
+                ->withInput();
+        }
 
-        return view('frontend.transfer_confirm', compact('from_account', 'to_account', 'amount', 'description'));
+        if($from_account->wallet->amount < $amount){
+            return back()
+                ->withErrors(['amount' => ' The amount is not enought.'])
+                ->withInput();
+        }
+
+        return view('frontend.transfer_confirm', compact('from_account', 'to_account', 'amount', 'description', 'hash_value'));
     }
 
     public function transferComplete(TransferFormValidateRequest $request)
     {
         // return $request->all();
+        // $str = $request->to_phone . $request->amount . $request->description;
+        // $hash_value2 = hash_hmac('sha256', $str, 'magicpay123!@#');
 
-        if ($request->amount < 1000) {
+        // if ($request->hash_value !== $hash_value2) {
+        //     return back()
+        //         ->withErrors(['amount' => 'The given data is invalid.'])
+        //         ->withInput();
+        // }
+        
+        // if ($request->amount < 1000) {
+        //     return back()
+        //         ->withErrors(['amount' => 'The amount must be at least 1000 MMK.'])
+        //         ->withInput();
+        // }
+        // $authUser = auth()->guard('web')->user();
+
+        // if ($authUser->phone == $request->to_phone) {
+        //     return back()
+        //         ->withErrors(['to_phone' => 'To account is invalide.'])
+        //         ->withInput();
+        // }
+
+        // $to_account = User::where('phone', $request->to_phone)->first();
+
+        // if (!$to_account) {
+        //     return back()
+        //         ->withErrors(['to_phone' => 'To account is invalide.'])
+        //         ->withInput();
+        // }
+
+        // $from_account = $authUser;
+        // // $to_phone = $request->to_phone;
+        // $amount = $request->amount;
+        // $description = $request->description;
+
+        // if (!$from_account->wallet || !$to_account->wallet) {
+        //     return back()
+        //         ->withErrors(['fail' => 'Something worng. The given data is invalid.'])
+        //         ->withInput();
+        // }
+
+
+        $authUser = auth()->guard('web')->user();
+
+        $from_account = $authUser;
+        $to_phone = $request->to_phone;
+        $amount = $request->amount;
+        $description = $request->description;
+        $hash_value = $request->hash_value;
+
+
+        $str = $to_phone . $amount . $description;
+        $hash_value2 = hash_hmac('sha256', $str, 'magicpay123!@#');
+
+        if ($hash_value !== $hash_value2) {
+            return back()
+                ->withErrors(['amount' => 'The given data is invalid.'])
+                ->withInput();
+        }
+
+        if ($amount < 1000) {
             return back()
                 ->withErrors(['amount' => 'The amount must be at least 1000 MMK.'])
                 ->withInput();
         }
-        $authUser = auth()->guard('web')->user();
 
-        if ($authUser->phone == $request->to_phone) {
+
+        if ($from_account->phone == $to_phone) {
             return back()
                 ->withErrors(['to_phone' => 'To account is invalide.'])
                 ->withInput();
@@ -122,16 +207,18 @@ class PageController extends Controller
                 ->withInput();
         }
 
-        $from_account = $authUser;
-        // $to_phone = $request->to_phone;
-        $amount = $request->amount;
-        $description = $request->description;
-
         if (!$from_account->wallet || !$to_account->wallet) {
             return back()
-                ->withErrors(['fail' => 'Something worng. The given data is invalid.'])
+                ->withErrors(['fail' => ' The given data is invalid.'])
                 ->withInput();
         }
+
+        if($from_account->wallet->amount < $amount){
+            return back()
+                ->withErrors(['amount' => ' The amount is not enought.'])
+                ->withInput();
+        }
+
 
         DB::beginTransaction();
 
@@ -196,9 +283,8 @@ class PageController extends Controller
             $transactions  = $transactions->where('type', $request->type);
         }
 
-        if($request->date){
+        if ($request->date) {
             $transactions = $transactions->whereDate('created_at', $request->date);
-            
         }
 
         $transactions = $transactions->paginate(5);
@@ -260,13 +346,12 @@ class PageController extends Controller
 
     public function transferHash(Request $request)
     {
-        $str = $request->to_phone.$request->amount.$request->description;
+        $str = $request->to_phone . $request->amount . $request->description;
         $hash_value = hash_hmac('sha256', $str, 'magicpay123!@#');
 
         return response()->json([
             'status' => 'success',
             'data' => $hash_value,
         ]);
-
     }
 }
