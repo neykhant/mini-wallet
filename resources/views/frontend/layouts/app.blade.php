@@ -85,7 +85,7 @@
                             </a>
                         </div>
                         <div class="col-3 text-center">
-                            <a href="">
+                            <a href="{{ url('transaction') }}">
                                 <i class="fas fa-exchange-alt"></i>
                                 <p>Transaction</p>
                             </a>

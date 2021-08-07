@@ -36,7 +36,7 @@
                     </a>
 
                     <hr>
-                    <a href="#" class="d-flex justify-content-between">
+                    <a href="{{ url('wallet') }}" class="d-flex justify-content-between">
                         <span><img src="{{ asset('img/wallet.png') }}" alt="">Wallet</span>
                         <span class="mr-3"><i class="fas fa-angle-right"></i></span>
                     </a>

@@ -65,6 +65,8 @@ class PageController extends Controller
 
     public function transferConfirm(TransferFormValidateRequest $request)
     {
+        return $request->all();
+        
         if ($request->amount < 1000) {
             return back()
                 ->withErrors(['amount' => 'The amount must be at least 1000 MMK.'])
@@ -254,5 +256,17 @@ class PageController extends Controller
             'status' => 'fail',
             'message' => 'The password is incorrect',
         ]);
+    }
+
+    public function transferHash(Request $request)
+    {
+        $str = $request->to_phone.$request->amount.$request->description;
+        $hash_value = hash_hmac('sha256', $str, 'magicpay123!@#');
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $hash_value,
+        ]);
+
     }
 }

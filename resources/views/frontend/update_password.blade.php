@@ -33,7 +33,7 @@
                     @enderror
                 </div>
 
-                <button type="submit" class="btn btn-theme btn-block mt-5">Update Password</button>
+                <button type="submit" class="btn btn-theme btn-block mt-4">Update Password</button>
             </form>
         </div>
     </div>
