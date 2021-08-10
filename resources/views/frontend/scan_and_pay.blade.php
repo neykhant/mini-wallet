@@ -86,6 +86,9 @@
             if (content) {
                 scanner.stop();
                 $('#scanModal').modal('hide');
+
+                var to_phone = content;
+                window.location.replace(` scan-and-pay-form?to_phone=${to_phone} `);
             }
         });
 
