@@ -49,4 +49,7 @@ Route::middleware('auth')->namespace('Fronted')->group(function () {
     Route::get('/transfer-hash', 'PageController@transferHash');
 
     Route::get('/receive-qr', 'PageController@receiveQR');
+
+    Route::get('/scan-and-pay', 'PageController@scanAndPay');
+    
 });
