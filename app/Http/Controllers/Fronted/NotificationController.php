@@ -13,4 +13,15 @@ class NotificationController extends Controller
 
         return view('frontend.notification', compact('notifications'));
     }
+
+    public function show($id)
+    {
+        $user = auth()->guard('web')->user();
+        $notification = $user->notifications()->where('id', $id)->firstOrFail();
+
+        $notification->markAsRead();
+        // return $notification;
+        return view('frontend.notification_detail', compact('notification'));
+
+    }
 }
