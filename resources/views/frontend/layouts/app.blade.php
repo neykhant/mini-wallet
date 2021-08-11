@@ -68,7 +68,7 @@
             </div>
         </div>
         <div class="bottom-menu">
-            <a href="" class="scan-tab">
+            <a href="{{url('scan-and-pay')}}" class="scan-tab">
                 <div class="inside">
                     <i class="fas fa-qrcode"></i>
                 </div>
@@ -137,6 +137,7 @@
                 });
             };
 
+            
             const Toast = Swal.mixin({
                 toast: true,
                 position: 'top-end',

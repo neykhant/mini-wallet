@@ -4,6 +4,8 @@
 <div class="scan-and-pay">
     <div class="card my-card">
         <div class="card-body text-center">
+            @include('frontend.layouts.flash')
+
             <div class="text-center">
                 <img src="{{asset('img/scan-and-pay.png')}}" alt="" style="width: 220px;">
             </div>
@@ -59,8 +61,6 @@
         // $('#scanModal').on('hidden.bs.modal', function(event) {
         //     qrScanner.stop();
         // })
-
-
 
 
         let scanner = new Instascan.Scanner({

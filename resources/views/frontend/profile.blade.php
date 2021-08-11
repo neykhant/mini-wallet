@@ -48,26 +48,31 @@
 @section('script')
 <script>
     $(document).ready(function() {
-        $(document).on('click', '.logout', function(e) {
+        $(document).on('click', '.logout', function(event) {
+            console.log(event);
+            alert('hello');
             e.preventDefault();
-            Swal.fire({
-                title: 'Are you sure want to logout?',
-                showCancelButton: true,
-                confirmButtonText: `Confirm`,
-                reverseButtons: true
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: "{{route('logout')}}",
-                        type: 'POST',
-                        success: function() {
-                            //    console.log(res);
-                            window.location.replace("{{route('profile')}}");
-                        }
-                    });
 
-                }
-            })
+
+
+            // Swal.fire({
+            //     title: 'Are you sure want to logout?',
+            //     showCancelButton: true,
+            //     confirmButtonText: `Confirm`,
+            //     reverseButtons: true
+            // }).then((result) => {
+            //     if (result.isConfirmed) {
+            //         $.ajax({
+            //             url: "{{route('logout')}}",
+            //             type: 'POST',
+            //             success: function() {
+            //                 //    console.log(res);
+            //                 window.location.replace("{{route('profile')}}");
+            //             }
+            //         });
+
+            //     }
+            // })
         });
     });
 </script>

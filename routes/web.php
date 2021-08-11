@@ -55,4 +55,5 @@ Route::middleware('auth')->namespace('Fronted')->group(function () {
     Route::get('/scan-and-pay/confirm', 'PageController@scanAndPayConfirm');
     Route::post('/scan-and-pay/complete', 'PageController@scanAndPayComplete');
     
+    
 });

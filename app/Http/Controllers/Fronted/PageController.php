@@ -6,12 +6,14 @@ use App\Helpers\UUIDGenerate;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TransferFormValidateRequest;
 use App\Http\Requests\UpdatePasswordRequest;
+use App\Notifications\GeneralNotification;
 use App\Transaction;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Notification;
 use PhpParser\Node\Stmt\TryCatch;
 use SebastianBergmann\Environment\Console;
 
@@ -20,6 +22,14 @@ class PageController extends Controller
     public function home()
     {
         $user = Auth::guard('web')->user();
+
+        $title = 'Hello';
+        $message = ' Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad, sint!';
+        $sourceable_id = 1;
+        $sourceable_type = User::class;
+        $web_link = url('profile') ;
+
+        Notification::send([$user], new GeneralNotification($title, $message, $sourceable_id, $sourceable_type, $web_link));
 
         return view('frontend.home', compact('user'));
     }
@@ -368,12 +378,12 @@ class PageController extends Controller
     public function scanAndPayForm(Request $request)
     {
         $from_account = auth()->guard('web')->user();
-       $to_account = User::where('phone', $request->to_phone)->first();
-       if(!$to_account){
-           return back()->withErrors(['fail', 'QR code is invalid.'])->withInput();
-       }
+        $to_account = User::where('phone', $request->to_phone)->first();
+        if (!$to_account) {
+            return back()->withErrors(['fail' => 'QR code is invalid.'])->withInput();
+        }
 
-       return view('frontend.scan_and_pay_form', compact('to_account', 'from_account'));
+        return view('frontend.scan_and_pay_form', compact('to_account', 'from_account'));
     }
 
     public function scanAndPayConfirm(TransferFormValidateRequest $request)
@@ -582,5 +592,4 @@ class PageController extends Controller
                 ->withInput();
         }
     }
-
 }
