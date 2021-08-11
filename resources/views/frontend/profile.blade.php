@@ -47,7 +47,10 @@
 
 @section('script')
 <script>
-    $(document).ready(function() {
+    $(document).ready(function(event) {
+        // alert('hello');
+        // console.log(event);
+
         $(document).on('click', '.logout', function(event) {
             console.log(event);
             alert('hello');

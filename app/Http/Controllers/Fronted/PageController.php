@@ -23,14 +23,6 @@ class PageController extends Controller
     {
         $user = Auth::guard('web')->user();
 
-        $title = 'Hello';
-        $message = ' Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad, sint!';
-        $sourceable_id = 1;
-        $sourceable_type = User::class;
-        $web_link = url('profile') ;
-
-        Notification::send([$user], new GeneralNotification($title, $message, $sourceable_id, $sourceable_type, $web_link));
-
         return view('frontend.home', compact('user'));
     }
     public function profile()
@@ -54,6 +46,14 @@ class PageController extends Controller
         if (Hash::check($old_password, $user->password)) {
             $user->password = Hash::make($new_password);
             $user->update();
+
+            $title = 'Change Password!';
+            $message = 'Your account password is successfully changed!';
+            $sourceable_id = $user->id;
+            $sourceable_type = User::class;
+            $web_link = url('profile');
+
+            Notification::send([$user], new GeneralNotification($title, $message, $sourceable_id, $sourceable_type, $web_link));
 
             return redirect()->route('profile')->with('update', 'Successfuly updated.');
         }
