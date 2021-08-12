@@ -17,17 +17,17 @@ body {
     font-family: "Open Sans", sans-serif;
 }
 
-a{
+a {
     text-decoration: none;
     color: #333;
 }
 
-a:hover{
+a:hover {
     color: #5842e3;
     text-decoration: none;
 }
 
-.card{
+.card {
     border-radius: 10px;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.09);
 
@@ -48,7 +48,7 @@ a:hover{
     color: #fff;
 }
 
-.invalid-feedback{
+.invalid-feedback {
     display: block;
 }
 /* ---------------------sweet alert------------------------------------ */
@@ -57,16 +57,16 @@ a:hover{
 }
 
 .swal2-title {
-    font-size:18px !important;
+    font-size: 18px !important;
 }
 
-.swal2-styled{
+.swal2-styled {
     border-radius: 10px !important;
     padding: 10px 25px !important;
 }
 
-.swal2-styled .swal2-confirm{
-background: #5842e3 !important;
+.swal2-styled .swal2-confirm {
+    background: #5842e3 !important;
 }
 /* -------------------Auth Form----------------- */
 
@@ -161,8 +161,7 @@ background: #5842e3 !important;
 }
 
 /* -----------------Account ---------------------------- */
-.account{
-
+.account {
 }
 
 .account .card {
@@ -182,17 +181,14 @@ background: #5842e3 !important;
     background: #fff;
 }
 
-
-
 /* -------------------------update password----------------- */
 
-.update-password img{
+.update-password img {
     width: 220px;
 }
 
-
 /* -------------------------scan tab------------------------------- */
-.scan-tab{
+.scan-tab {
     width: 60px;
     height: 60px;
     background: #ededf5;
@@ -207,7 +203,7 @@ background: #5842e3 !important;
     align-items: center;
 }
 
-.scan-tab .inside{
+.scan-tab .inside {
     width: 52px;
     height: 52px;
     border-radius: 100%;
@@ -218,42 +214,39 @@ background: #5842e3 !important;
     animation: glow 5s infinite;
 }
 
-.scan-tab .inside i{
+.scan-tab .inside i {
     margin: 0;
 }
 
-@keyframes glow{
-    0%{
+@keyframes glow {
+    0% {
         box-shadow: 0 0 -10px #5842e3;
     }
 
-    40%{
+    40% {
         box-shadow: 0 0 15px #5842e3;
     }
 
-    60%{
+    60% {
         box-shadow: 0 0 15px #5842e3;
     }
 
-    100%{
+    100% {
         box-shadow: 0 0 -10px #5842e3;
     }
 }
-
-
 
 /* ---------------------------wallet-------------------- */
 
-.wallet{
-
+.wallet {
 }
 
-.wallet .my-card{
+.wallet .my-card {
     background: #5842e3;
     color: #fff;
 }
 
-.wallet .my-card span{
+.wallet .my-card span {
     text-transform: uppercase;
     font-size: 14px;
     display: inline-block;
@@ -261,17 +254,17 @@ background: #5842e3 !important;
     color: #ededf5;
 }
 
-.wallet .my-card h4{
+.wallet .my-card h4 {
     font-size: 22px;
     font-weight: 900;
 }
 
-.wallet .my-card h5{
+.wallet .my-card h5 {
     font-size: 20px;
     font-weight: 900;
 }
 
-.wallet .my-card p{
+.wallet .my-card p {
     font-size: 16px;
     font-weight: 900;
     text-transform: uppercase;
@@ -279,13 +272,13 @@ background: #5842e3 !important;
 
 /* -------------------------Home-------------------------- */
 
-.shortcut-box img{
+.shortcut-box img {
     width: 25px;
     height: 25px;
     margin-right: 8px;
 }
 
-.function-box img{
+.function-box img {
     width: 28px;
     height: 28px;
     margin-right: 8px;
@@ -293,6 +286,15 @@ background: #5842e3 !important;
 
 /* --------------------Transaction----------------------------- */
 
-.transaction-detail img{
+.transaction-detail img {
     width: 60px;
+}
+
+/* ----------------------Notifications ----------------------------- */
+
+.unread_noti_count {
+    position: absolute;
+    top: -8px;
+    right: 15px;
+    padding: 3px;
 }

@@ -1,7 +1,7 @@
 @extends('frontend.layouts.app')
 @section('title', 'Notification Detail')
 @section('content')
-<div>
+
     <div class="card">
         <div class="card-body text-center">
             <div class="text-center">
@@ -14,5 +14,6 @@
             <a href="{{$notification->data['web_link'] }}" class="btn btn-theme btn-sm">Continue</a>
         </div>
     </div>
+    
 </div>
 @endsection
