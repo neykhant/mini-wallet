@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Helpers\UUIDGenerate;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
+use App\Wallet;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -80,6 +82,16 @@ class RegisterController extends Controller
         $user->user_agent = $request->server('HTTP_USER_AGENT');
         $user->login_at = date('Y-m-d H:m:i');
         $user->update();
+
+        Wallet::firstOrCreate(
+            [
+                'user_id' => $user->id,
+            ],
+            [
+                'account_number' => UUIDGenerate::accountNumber(),
+                'amount' => 0,
+            ]
+        );
 
         return redirect($this->redirectTo);
     }
