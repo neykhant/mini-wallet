@@ -60,7 +60,7 @@ class AuthController extends Controller
         if (Auth::attempt(['phone' => $request->phone, 'password' => $request->password])) {
 
             $user = auth()->user();
-            
+
             $user->ip = $request->ip();
             $user->user_agent = $request->server('HTTP_USER_AGENT');
             $user->login_at = date('Y-m-d H:m:i');
@@ -82,5 +82,12 @@ class AuthController extends Controller
         }
 
         return fail('These credentials do not match our records.', '');
+    }
+
+    public function logout(){
+        $user = auth()->user();
+        $user->token()->revoke();
+
+        return success('Successfully logouted.', null);
     }
 }
