@@ -21,7 +21,9 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/test', function(){
 //     return 'hello';
 // });
+
+
 Route::namespace('Api')->group(function(){
-    Route::get('/test', 'PageController@test');
+    Route::post('register', 'AuthController@register');
 });
 
