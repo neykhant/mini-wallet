@@ -32,6 +32,9 @@ Route::namespace('Api')->group(function(){
 
         Route::post('logout', 'AuthController@logout');
         Route::get('profile', 'PageController@profile');
+
+        Route::get('transaction', 'PageController@transaction');
+        Route::get('transaction/{trx_id}', 'PageController@transactionDetail');
     });
 });
 
