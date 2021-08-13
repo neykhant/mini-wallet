@@ -17,15 +17,24 @@ class PageController extends Controller
         return success('Success', $data);
     }
 
-    public function transaction()
+    public function transaction(Request $request)
     {
-
         $authUser = auth()->user();
         $transactions = Transaction::where('user_id', $authUser->id)
             ->with('user', 'source')
-            ->orderBy('created_at', 'DESC')->get();
+            ->orderBy('created_at', 'DESC');
 
-        $data = TransactionResource::collection($transactions);
+            if($request->date){
+                $transactions = $transactions->whereDate('created_at', $request->date);
+            }
+
+            if($request->type){
+                $transactions = $transactions->where('type', $request->type);
+            }
+
+        $transactions = $transactions->paginate(5);
+
+        $data = TransactionResource::collection($transactions)->additional(['result' => 1, 'message' => 'success']);
 
         return $data;
     }
