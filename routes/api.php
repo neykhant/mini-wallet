@@ -38,6 +38,9 @@ Route::namespace('Api')->group(function(){
 
         Route::get('notification', 'PageController@notification');
         Route::get('notification/{id}', 'PageController@notificationDetail');
+
+        Route::get('to-account-verify', 'PageController@toAccountVerify');
+        Route::get('transfer/confirm', 'PageController@transferConfirm');
     });
 });
 
