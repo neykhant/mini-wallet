@@ -35,6 +35,9 @@ Route::namespace('Api')->group(function(){
 
         Route::get('transaction', 'PageController@transaction');
         Route::get('transaction/{trx_id}', 'PageController@transactionDetail');
+
+        Route::get('notification', 'PageController@notification');
+        Route::get('notification/{id}', 'PageController@notificationDetail');
     });
 });
 
