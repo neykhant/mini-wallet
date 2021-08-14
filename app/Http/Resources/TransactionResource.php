@@ -17,9 +17,9 @@ class TransactionResource extends JsonResource
     {
         $title = '';
         if($this->type == 1){
-            $title = 'From  ' . $this->source->name;
+            $title = 'From  ' . ($this->source ? $this->source->name : '');
         }else if($this->type == 2){
-            $title = 'To  ' . $this->source->name;
+            $title = 'To  ' . ($this->source ? $this->source->name : '');
         }
 
 
@@ -28,7 +28,7 @@ class TransactionResource extends JsonResource
             'amount' =>number_format($this->amount, 2) . ' MMK',
             'type' => $this->type, // 1 => income, 2 => expense
             'title' => $title,
-            'date' => Carbon::parse($this->created_at)->format('Y-m-d H:i:s'),
+            'date_time' => Carbon::parse($this->created_at)->format('Y-m-d H:i:s'),
         ];
     }
 }
