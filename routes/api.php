@@ -41,6 +41,7 @@ Route::namespace('Api')->group(function(){
 
         Route::get('to-account-verify', 'PageController@toAccountVerify');
         Route::get('transfer/confirm', 'PageController@transferConfirm');
+        Route::post('transfer/complete', 'PageController@transferComplete');
     });
 });
 
