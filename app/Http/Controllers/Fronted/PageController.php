@@ -139,51 +139,8 @@ class PageController extends Controller
 
     public function transferComplete(TransferFormValidateRequest $request)
     {
-        // return $request->all();
-        // $str = $request->to_phone . $request->amount . $request->description;
-        // $hash_value2 = hash_hmac('sha256', $str, 'magicpay123!@#');
-
-        // if ($request->hash_value !== $hash_value2) {
-        //     return back()
-        //         ->withErrors(['amount' => 'The given data is invalid.'])
-        //         ->withInput();
-        // }
-
-        // if ($request->amount < 1000) {
-        //     return back()
-        //         ->withErrors(['amount' => 'The amount must be at least 1000 MMK.'])
-        //         ->withInput();
-        // }
-        // $authUser = auth()->guard('web')->user();
-
-        // if ($authUser->phone == $request->to_phone) {
-        //     return back()
-        //         ->withErrors(['to_phone' => 'To account is invalide.'])
-        //         ->withInput();
-        // }
-
-        // $to_account = User::where('phone', $request->to_phone)->first();
-
-        // if (!$to_account) {
-        //     return back()
-        //         ->withErrors(['to_phone' => 'To account is invalide.'])
-        //         ->withInput();
-        // }
-
-        // $from_account = $authUser;
-        // // $to_phone = $request->to_phone;
-        // $amount = $request->amount;
-        // $description = $request->description;
-
-        // if (!$from_account->wallet || !$to_account->wallet) {
-        //     return back()
-        //         ->withErrors(['fail' => 'Something worng. The given data is invalid.'])
-        //         ->withInput();
-        // }
-
-
+        
         $authUser = auth()->guard('web')->user();
-
         $from_account = $authUser;
         $to_phone = $request->to_phone;
         $amount = $request->amount;
@@ -312,7 +269,7 @@ class PageController extends Controller
             DB::rollBack();
 
             return back()
-                ->withErrors(['fail', 'Something wrong.' + $error->getMessage()])
+                ->withErrors(['fail' => 'Something wrong.' . $error->getMessage()])
                 ->withInput();
         }
     }

@@ -1,5 +1,5 @@
 @extends('backend.layouts.app');
-@section('title', 'Add Amount');
+@section('title', 'Reduce Amount');
 @section('wallet-active','mm-active');
 @section('content')
 <div class="app-page-title">
@@ -9,7 +9,7 @@
                 <i class="pe-7s-wallet icon-gradient bg-mean-fruit">
                 </i>
             </div>
-            <div>Add Amount</div>
+            <div>Reduce Amount</div>
         </div>
     </div>
 </div>
@@ -19,7 +19,7 @@
         <div class="card-body">
             @include('backend.layouts.flash')
 
-            <form action="{{url('admin/wallet/add/amount/store') }}" method="POST">
+            <form action="{{url('admin/wallet/reduce/amount/store') }}" method="POST">
                 @csrf
 
                 <div class="form-group">
