@@ -28,6 +28,10 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css">
 
     <link rel="stylesheet" href="{{asset('backend/css/style.css')}}">
+    <!-- select2 -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
+
 
     @yield('extra_css')
 
@@ -69,6 +73,9 @@
     <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
     <!-- sweet Alert 2 -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- select2 -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    
 
 
     <script>
@@ -80,10 +87,10 @@
             let token = document.querySelector('meta[name=csrf-token]');
             // console.log(token);
 
-            if(token){
+            if (token) {
                 $.ajaxSetup({
                     headers: {
-                         'X-CSRF-TOKEN': token.content
+                        'X-CSRF-TOKEN': token.content
                     }
                 });
             }
