@@ -18,26 +18,29 @@
     <a href="{{ route('admin.user.create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Create User</a>
 </div>
 
+
 <div class="content py-3">
     <div class="card">
         <div class="card-body">
-            <table class="table table-bordered Datatable">
-                <thead>
-                    <tr class="bg-light">
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>IP</th>
-                        <th>User Agent</th>
-                        <th>Login at</th>
-                        <th>Created up</th>
-                        <th>Updated up</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
+            <!-- <div class="d-flex justify-content-between"> -->
+                <table class="table table-bordered Datatable">
+                    <thead>
+                        <tr class="bg-light">
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>IP</th>
+                            <th>User Agent</th>
+                            <th>Login at</th>
+                            <th>Created up</th>
+                            <th>Updated up</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            <!-- </div> -->
         </div>
     </div>
 </div>
