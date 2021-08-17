@@ -169,6 +169,7 @@
                 window.history.go(-1);
                 return false;
             });
+            
         });
     </script>
     @yield('scripts')

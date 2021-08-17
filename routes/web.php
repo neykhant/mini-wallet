@@ -23,6 +23,7 @@ Route::post('admin/login', 'Auth\AdminLoginController@login')->name('admin.login
 Route::post('admin/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
 
 
+
 //user auth
 Auth::routes();
 

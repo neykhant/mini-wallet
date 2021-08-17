@@ -24,12 +24,17 @@
 
                 <div class="form-group">
                     <label>User</label>
-                    <select name="user_id" class="form-control user_id">
+                    <select style="width: 100%;" name="user_id" class="form-control user_id">
                         <option value="">---Please Choose ---</option>
                         @foreach($users as $user)
                         <option value="{{$user->id}}">{{$user->name}} ({{$user->phone}})</option>
                         @endforeach
                     </select>
+                    <!-- <select class="form-control user_id" name="state">
+                        <option value="AL">Alabama</option>
+                        ...
+                        <option value="WY">Wyoming</option>
+                    </select> -->
                 </div>
 
                 <div class="form-group">
@@ -56,6 +61,7 @@
 @section('scripts')
 <script>
     $(document).ready(function() {
+        // $('.user_id').select2();
         $('.user_id').select2({
             placeholder: '---Please Choose---',
             // allowClear: true,
